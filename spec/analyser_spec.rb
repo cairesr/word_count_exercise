@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Analyzer do
-  context '#validate_url' do
+  describe '#validate_url' do
     context 'with a nil url' do
       subject { Analyzer.new(nil) }
 
@@ -25,7 +25,7 @@ RSpec.describe Analyzer do
     end
   end
 
-  context '#download_xml' do
+  describe '#download_xml' do
   	let(:fake_xml) { '<xml><speaker>Hi</speaker></xml>' }
 
     let(:tempfile) do
