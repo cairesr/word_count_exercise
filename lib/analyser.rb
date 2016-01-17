@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class Analyzer
 
   attr_accessor :remote_file_url
@@ -18,5 +20,11 @@ class Analyzer
     validate_url
 
     open(@remote_file_url, 'rb').read
+  end
+
+  def children_from_tag(tag='SPEAKER')
+    parsed_xml = Nokogiri::XML.parse(download_xml)
+
+    parsed_xml.xpath("//#{tag}").map { |tag| tag.text }
   end
 end
