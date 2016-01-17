@@ -56,31 +56,43 @@ RSpec.describe Analyzer do
   end
 
   describe '#children_from_tag' do
-    it 'calls #download_xml' do
-      allow(subject).to receive(:open).and_return(tempfile)
+    context 'with a valid tag' do
+      it 'calls #download_xml' do
+        allow(subject).to receive(:open).and_return(tempfile)
 
-      expect(subject).to receive(:download_xml)
+        expect(subject).to receive(:download_xml)
 
-      subject.children_from_tag
-    end
+        subject.children_from_tag('SPEAKER')
+      end
 
-    context 'with default method tag argument' do
       let(:array_tag_children) { ['fluffy character'] }
 
       it 'parses the given xml tag children values into an array' do
         allow(subject).to receive(:open).and_return(tempfile)
 
-        expect(subject.children_from_tag).to eq(array_tag_children)
+        expect(subject.children_from_tag('SPEAKER')).to eq(array_tag_children)
+      end
+    end
+  end
+
+  describe '#word_count_by' do
+    context 'with default method tag argument' do
+      let(:word_count_hash) { { 'fluffy character' => 1 } }
+
+      it 'returns a hash with key: tag_children_value and value: word_count' do
+        allow(subject).to receive(:open).and_return(tempfile)
+
+        expect(subject.word_count_by('SPEAKER')).to eq(word_count_hash)
       end
     end
 
     context 'with a given method tag argument' do
-      let(:array_tag_children) { ['shakespeare'] }
+      let(:word_count_hash) { {"shakespeare" => 1} }
 
-      it 'parses the given xml tag children values into an array' do
+      it 'returns a hash with key: tag_children_value and value: word_count' do
         allow(subject).to receive(:open).and_return(tempfile)
 
-        expect(subject.children_from_tag('AUTHOR')).to eq(array_tag_children)
+        expect(subject.word_count_by('AUTHOR')).to eq(word_count_hash)
       end
     end
   end

@@ -22,9 +22,17 @@ class Analyzer
     open(@remote_file_url, 'rb').read
   end
 
-  def children_from_tag(tag='SPEAKER')
+  def children_from_tag(tag)
     parsed_xml = Nokogiri::XML.parse(download_xml)
 
     parsed_xml.xpath("//#{tag}").map { |tag| tag.text }
+  end
+
+  def word_count_by(tag='SPEAKER')
+    children_from_tag(tag).reduce(Hash.new(0)) do |hashy, word|
+      hashy[word] += 1
+
+      hashy
+    end
   end
 end
