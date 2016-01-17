@@ -24,4 +24,34 @@ RSpec.describe Analyzer do
       end
     end
   end
+
+  context '#download_xml' do
+  	let(:fake_xml) { '<xml><speaker>Hi</speaker></xml>' }
+
+    let(:tempfile) do
+      tempfile = Tempfile.new('donwloaded')
+      tempfile.write(fake_xml)
+      tempfile.rewind
+
+      tempfile
+    end
+
+    context 'with a valid url call' do
+      it 'returns the downloaded content' do
+        allow(subject).to receive(:open).and_return(tempfile)
+
+        expect(subject.download_xml).to eq(fake_xml)
+      end
+    end
+
+    context 'when executed' do
+      it 'calls #validate_url' do
+        allow(subject).to receive(:open).and_return(tempfile)
+
+        expect(subject).to receive(:validate_url)
+
+        subject.download_xml
+      end
+    end
+  end
 end

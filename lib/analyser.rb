@@ -1,5 +1,3 @@
-require 'uri'
-
 class Analyzer
 
   attr_accessor :remote_file_url
@@ -14,5 +12,11 @@ class Analyzer
     URI.parse @remote_file_url
 
     @remote_file_url
+  end
+
+  def download_xml
+    validate_url
+
+    open(@remote_file_url, 'rb').read
   end
 end
