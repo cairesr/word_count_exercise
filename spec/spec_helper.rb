@@ -16,6 +16,9 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'tempfile'
+require 'uri'
+
 Dir['lib/*.rb'].each { |f| require File.expand_path(f) }
 
 RSpec.configure do |config|
