@@ -1,17 +1,23 @@
 require 'spec_helper'
 
-RSpec.describe Analyzer, "#download_xml" do
-  subject(:analyzer) { Analyzer.new }
-
+RSpec.describe Analyzer, "#validate_url" do
   context 'with a nil url' do
   	it 'raises an ArgumentError' do
-  	  expect { analyzer.download_xml(nil) }.to raise_error(ArgumentError)
+  	  expect { subject.validate_url(nil) }.to raise_error(ArgumentError)
   	end
   end
 
   context 'with an invalid url' do
   	it 'raises URI::InvalidURIError' do
-  	  expect { analyzer.download_xml('http:/|www.luv.com') }.to raise_error(URI::InvalidURIError)
+  	  expect { subject.validate_url('http:/|www.luv.com') }.to raise_error(URI::InvalidURIError)
   	end
+  end
+
+  context 'with the default url attribute' do
+    let(:default_url) { 'http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml' }
+
+    it 'uses method default url value' do
+      expect(subject.validate_url).to eq(default_url)
+    end
   end
 end
