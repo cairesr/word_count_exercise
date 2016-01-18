@@ -1,4 +1,5 @@
 # Macbeth Character Word Count
+[![Build Status](https://travis-ci.org/cairesr/word_count_exercise.svg?branch=master)](https://travis-ci.org/cairesr/word_count_exercise)
 
 Counts how many times a character *speaks* in the Macebeth play.
 
