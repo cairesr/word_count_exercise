@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'nokogiri'
-gem 'rspec', require: 'spec'
+
+group :test do
+  gem 'rake'
+  gem 'rspec', require: 'spec'
+end
