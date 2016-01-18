@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'open-uri'
 
 class Analyzer
 
@@ -28,11 +29,21 @@ class Analyzer
     parsed_xml.xpath("//#{tag}").map { |tag| tag.text }
   end
 
-  def word_count_by(tag='SPEAKER')
+  def word_count_by(tag)
     children_from_tag(tag).reduce(Hash.new(0)) do |hashy, word|
       hashy[word] += 1
 
       hashy
     end
+  end
+
+  def sort_by_reversed_word_count(tag = 'SPEAKER' , key_to_be_ignored = 'ALL')
+    raise ArgumentError, 'A tag should be provided' if tag.nil? || tag.empty?
+
+    sorted_word_count = word_count_by(tag).sort_by { |k, v| v }.reverse.to_h
+
+    sorted_word_count.delete key_to_be_ignored
+
+    sorted_word_count
   end
 end
