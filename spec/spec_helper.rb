@@ -17,9 +17,11 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'tempfile'
-require 'uri'
+require 'open-uri'
 
-Dir['lib/*.rb'].each { |f| require File.expand_path(f) }
+#Dir['lib/*.rb'].each { |f| require File.expand_path(f) }
+
+require_relative '../analyzer'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
