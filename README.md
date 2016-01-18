@@ -23,5 +23,17 @@ require_relative 'analyzer'
 analyzer = Analyzer.new('http://www.ibiblio.org/xml/examples/shakespeare/othello.xml')
 analyzer.sort_by_reversed_word_count.each {|k, v| puts "#{k}, #{v}"}
 ```
+
+# Run the specs (rspec)
+```
+rake spec
+```
+or
+```
+rspec
+```
+in the root dir
+
+
 ## Pre-requirement
 Ruby >= 2.2.2
