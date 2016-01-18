@@ -23,4 +23,4 @@ analizer = Analyzer.new('http://www.ibiblio.org/xml/examples/shakespeare/othello
 analyzer.sort_by_reversed_word_count.each {|k, v| puts "#{k}, #{v}"}
 ```
 ## Pre-requirement
-Ruby >= 2.*
+Ruby >= 2.2.2
