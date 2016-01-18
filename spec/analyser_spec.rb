@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Analyzer do
-  let(:fake_xml) { '<?xml version="1.0"?><BIG_TAG><SPEAKER>fluffy character</SPEAKER><AUTHOR>shakespeare</AUTHOR></BIG_TAG>' }
+  let(:fake_xml) { File.open('spec/sample.xml').read }
 
   let(:tempfile) do
     tempfile = Tempfile.new('donwloaded')
@@ -65,7 +65,17 @@ RSpec.describe Analyzer do
         subject.children_from_tag('SPEAKER')
       end
 
-      let(:array_tag_children) { ['fluffy character'] }
+      let(:array_tag_children) {
+        [ 'First Witch',
+          'Second Witch',
+          'Third Witch',
+          'First Witch',
+          'Second Witch',
+          'Third Witch',
+          'First Witch',
+          'Second Witch',
+          'ALL']
+        }
 
       it 'parses the given xml tag children values into an array' do
         allow(subject).to receive(:open).and_return(tempfile)
@@ -77,7 +87,7 @@ RSpec.describe Analyzer do
 
   describe '#word_count_by' do
     context 'with default method tag argument' do
-      let(:word_count_hash) { { 'fluffy character' => 1 } }
+      let(:word_count_hash) { { 'First Witch' => 3, 'Second Witch' => 3, 'Third Witch' => 2, 'ALL' => 1 } }
 
       it 'returns a hash with key: tag_children_value and value: word_count' do
         allow(subject).to receive(:open).and_return(tempfile)
@@ -87,12 +97,12 @@ RSpec.describe Analyzer do
     end
 
     context 'with a given method tag argument' do
-      let(:word_count_hash) { {"shakespeare" => 1} }
+      let(:word_count_hash) { [ 'When shall we three meet again', 1 ] }
 
-      it 'returns a hash with key: tag_children_value and value: word_count' do
+      it 'returns a hash { tag_children_value => word_count }' do
         allow(subject).to receive(:open).and_return(tempfile)
 
-        expect(subject.word_count_by('AUTHOR')).to eq(word_count_hash)
+        expect(subject.word_count_by('LINE').first).to eq(word_count_hash)
       end
     end
   end
