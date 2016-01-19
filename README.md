@@ -12,14 +12,14 @@ ruby macbeth_analyzer.rb
 ```
 
 It's possible to change the tag to be parsed:
-```
+```ruby
 require_relative 'analyzer'
 
 Analyzer.new.sort_by_reversed_word_count('TITLE').each {|k, v| puts "#{k}, #{v}"}
 ```
 
 It's also possible to instantiate the Analyzer to count the words for another play.
-```
+```ruby
 require_relative 'analyzer'
 
 analyzer = Analyzer.new('http://www.ibiblio.org/xml/examples/shakespeare/othello.xml')
