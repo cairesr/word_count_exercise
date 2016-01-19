@@ -30,6 +30,8 @@ class Analyzer
   end
 
   def word_count_by(tag)
+    return [] if tag.nil? || tag.empty?
+
     children_from_tag(tag).reduce(Hash.new(0)) do |hashy, word|
       hashy[word] += 1
 

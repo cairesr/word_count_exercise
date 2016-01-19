@@ -105,6 +105,12 @@ RSpec.describe Analyzer do
         expect(subject.word_count_by('LINE').first).to eq(word_count_hash)
       end
     end
+
+    context 'with nil tag argument' do
+      it 'returns an empty array' do
+        expect(subject.word_count_by('')).to eq([])
+      end
+    end
   end
 
   describe '#sort_by_descending_word_count' do
