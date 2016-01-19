@@ -40,7 +40,7 @@ class Analyzer
   end
 
   def sort_by_reversed_word_count(tag = 'SPEAKER' , key_to_be_ignored = 'ALL')
-    raise ArgumentError, 'A tag should be provided' if tag.nil? || tag.empty?
+    return [] if tag.nil? || tag.empty?
 
     sorted_word_count = word_count_by(tag).sort_by { |k, v| v }.reverse.to_h
 

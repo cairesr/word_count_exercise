@@ -123,7 +123,7 @@ RSpec.describe Analyzer do
     context 'returns the sorted tag/word_count hash' do
       let(:word_count_hash) { { 'First Witch' => 3, 'Second Witch' => 3, 'Third Witch' => 2 } }
 
-      context 'exclude the key ALL' do
+      context 'without the key ALL' do
         it 'returns the hash sorted by its values' do
           allow(subject).to receive(:open).and_return(tempfile)
 
@@ -131,7 +131,7 @@ RSpec.describe Analyzer do
         end
       end
 
-      context 'exclude the key "First Witch"' do
+      context 'without the key "First Witch"' do
         let(:word_count_hash) { { 'Second Witch' => 3, 'Third Witch' => 2, 'ALL' => 1 } }
 
         it 'returns the hash sorted by its values with all the keys' do
@@ -141,13 +141,25 @@ RSpec.describe Analyzer do
         end
       end
 
-      context 'all keys included' do
+      context 'with all keys included' do
         let(:word_count_hash) { { 'First Witch' => 3, 'Second Witch' => 3, 'Third Witch' => 2, 'ALL' => 1 } }
 
         it 'returns the hash sorted by its values with all the keys' do
           allow(subject).to receive(:open).and_return(tempfile)
 
           expect(subject.sort_by_reversed_word_count('SPEAKER', nil)).to eq(word_count_hash)
+        end
+      end
+
+      context 'with nil tag argument' do
+        it 'returns an empty array' do
+          expect(subject.sort_by_reversed_word_count(nil)).to eq([])
+        end
+      end
+
+      context 'with empty string tag argument' do
+        it 'returns an empty array' do
+          expect(subject.sort_by_reversed_word_count('')).to eq([])
         end
       end
     end
