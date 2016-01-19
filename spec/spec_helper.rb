@@ -21,7 +21,7 @@ require 'open-uri'
 
 #Dir['lib/*.rb'].each { |f| require File.expand_path(f) }
 
-require_relative '../analyzer'
+require_relative '../lib/analyzer'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
