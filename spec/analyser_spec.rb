@@ -108,6 +108,12 @@ RSpec.describe Analyzer do
 
     context 'with nil tag argument' do
       it 'returns an empty array' do
+        expect(subject.word_count_by(nil)).to eq([])
+      end
+    end
+
+    context 'with an empty string tag argument' do
+      it 'returns an empty array' do
         expect(subject.word_count_by('')).to eq([])
       end
     end
