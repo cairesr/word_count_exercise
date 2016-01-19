@@ -83,6 +83,18 @@ RSpec.describe Analyzer do
         expect(subject.children_from_tag('SPEAKER')).to eq(array_tag_children)
       end
     end
+
+    context 'with nil tag argument' do
+      it 'returns an empty array' do
+        expect(subject.children_from_tag(nil)).to eq([])
+      end
+    end
+
+    context 'with empty string tag argument' do
+      it 'returns an empty array' do
+        expect(subject.children_from_tag('')).to eq([])
+      end
+    end
   end
 
   describe '#word_count_by' do

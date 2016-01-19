@@ -24,6 +24,8 @@ class Analyzer
   end
 
   def children_from_tag(tag)
+    return [] if tag.nil? || tag.empty?
+
     parsed_xml = Nokogiri::XML.parse(download_xml)
 
     parsed_xml.xpath("//#{tag}").map { |tag| tag.text }
