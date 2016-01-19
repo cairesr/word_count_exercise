@@ -7,8 +7,8 @@ The main script donwloads a xml and runs the analyzer on it.
 
 # Usage
 ```
-bundle install*
-ruby macbeth_analyzer.rb*
+bundle install
+ruby macbeth_analyzer.rb
 ```
 
 It's possible to change the tag to be parsed:
