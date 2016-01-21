@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Analyzer do
+describe Analyzer do
   let(:fake_xml) { File.open('spec/sample.xml').read }
 
   let(:tempfile) do
